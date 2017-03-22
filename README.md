@@ -12,10 +12,12 @@ Or, if you would like to view the website locally (it still requires some javasc
   4. now you can go ahead and load up `localhost:8000/rehamilton.html` in your browser and enjoy!
   
 ## About this app
+
 Using a mixture of open data and locally sourced data this application serves as an one-stop location for all of your recycling needs in the city of Hamilton. It displays markers relating to locations of the composting facilities, privately-owned recycling facilities, municipal recycling facilities and all landfills. The app can provide a route to the nearest municipal and private facilities from any location on the map. The app also presents information regarding when you're garbage and recycling pickup is due as well as whether you're applicable for leaf and yard services. This can be accessed using the side bar. <br>
 Any more information you need regarding the use of the app is <b>probably</b> covered in the help popup, which is always display when you load the website or by clicking the question mark icon in the top right.
 
-##Why?
+## Why?
+
 This app was created with <b>love</b> (and javascript) by McMaster University students who understand the growing concern around waste production within the city. <br>
 Our inspiration for this app was the lack of recycling information for residents in Hamilton. Previously, there was no easily accessible source of information regarding the various recycling options around the city. <br>
 This app is seeking to develop sustainable solutions for the average resident of Hamilton. The app seeks to empower each resident with information that allows them to make better decisions regarding waste and unwanted products. <br>

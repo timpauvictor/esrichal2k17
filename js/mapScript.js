@@ -18,45 +18,6 @@ var chargeIcon = L.icon({
 });
 
 
-var garLegendActive = false;
-var leafLegendActive = false;
-
-var garLegend = L.control({ position: 'bottomright' });
-
-garLegend.onAdd = function(map) {
-
-    var div = L.DomUtil.create('div', 'legend'),
-        labels = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'];
-
-    div.innerHTML += "Legend: <br>"
-    for (var i = 0; i < labels.length; i++) {
-        // console.log(labels[i]);
-        div.innerHTML +=
-            '<i style="background:' + getGarbageColor(labels[i]) + '"></i> <b>' +
-            labels[i] + '</b><br>';
-    }
-
-    return div;
-};
-
-var leafLegend = L.control({ position: 'bottomright' });
-
-leafLegend.onAdd = function(map) {
-
-    var div = L.DomUtil.create('div', 'legend'),
-        labels = ['Yes', 'No'];
-
-    div.innerHTML += 'Do I get leaf and yard waste pickup? <br>';
-    for (var i = 0; i < labels.length; i++) {
-        // console.log(labels[i]);
-        div.innerHTML +=
-            '<i style="background:' + getYesNoColour(labels[i]) + '"></i> <b>' +
-            labels[i] + '</b><br>';
-    }
-
-    return div;
-};
-
 function getYesNoColour(res) {
     if (res === 'Yes') {
         return '#4CAF50';
@@ -231,7 +192,16 @@ function addMarkerShapeFile(path, arr) { //generic function to add shapeFiles to
                 
                 arr.push(feature);
                 layer.bindPopup(Object.keys(feature.properties).map(function(k) {
-                    return "<div><span class=\"markerTitle\"><b>" + k + "</b></span>" + "<span class=\"markerText\">" + feature.properties[k] + "</span>";
+                    if (k == "Charging_L") {
+                        label = "Charging Level";
+                    } else if (k == "Level_2_Ch") {
+                        label = "Level 2 Chargers";                        
+                    } else if (k == "Level_3_Ch") {
+                        label = "Level 3 Chargers";
+                    } else {
+                        label = k
+                    }
+                    return "<div><span class=\"markerTitle\"><b>" + label + "</b></span>" + "<span class=\"markerText\">" + feature.properties[k] + "</span>";
                 }).join("<br />"), {
                     maxHeight: 300
                 });
@@ -368,17 +338,17 @@ function findNearestMarker(position, featureArr) {
 }
 
 function requestToken() {
-    var jQueryPromise = $.post("https://www.arcgis.com/sharing/rest/oauth2/token/", {
+    return $.post("https://www.arcgis.com/sharing/rest/oauth2/token/", {
         "client_id": "4zKEN5BilxUnVaqy",
         "client_secret": "804e33b62c6247e4b2465d6cbc929e43",
         "grant_type": "client_credentials"
-    })
-    var realPromise = Promise.resolve(jQueryPromise);
-    realPromise.then(function(val) {
-        valObj = JSON.parse(val);
-        accessToken = valObj.access_token;
-        console.error(accessToken);
     });
+    // var realPromise = Promise.resolve(jQueryPromise);
+    // realPromise.then(function(val) {
+    //     valObj = JSON.parse(val);
+    //     accessToken = valObj.access_token;
+    //     console.error(accessToken);
+    // });
 }
 
 function addressGeocode(startCoords, endAddress) {
@@ -424,10 +394,10 @@ function getIso(position) {
 }
 
 function test() {
-    position = [0, 0];
+    position = __startingCoords;
     console.log("Making iso at " + position[0] + position[1]);
     var facilities = position[0] + ", " + position[1] + ";";
-    var getPromise = $.get("http://route.arcgis.com/arcgis/rest/services/World/ServiceAreas/NAServer/ServiceArea_World/solveServiceArea?token=" + accessToken + "&facilities=-122.253,37.757&outSR=102100&f=json");
+    var getPromise = $.get("http://route.arcgis.com/arcgis/rest/services/World/ServiceAreas/NAServer/ServiceArea_World/solveServiceArea?token=" + accessToken + "&facilities=" + position[1] + "," + position[0] + "&outSR=102100&f=json");
     var realPromise = Promise.resolve(getPromise);
     realPromise.then(function(val) {
         valObj = JSON.parse(val);
@@ -517,28 +487,30 @@ function parseJsonPoints() {
 }
 
 function mapSetup() {
-    requestToken();
-    loadMap(); //loads map and adds it to div
-    test();
+    requestToken().then( function(tokenData) {
+        accessToken = JSON.parse(tokenData).access_token;
+        loadMap(); //loads map and adds it to div
+        test();
 
-    //load out shapefiles, having to keep track of the layers here is probably the dumbest thing I've done
-    // addPolygonShapeFile("../data/wasteday.zip"); //layer 0
-    // addPolygonShapeFile("../data/LeafYardServices.zip"); //layer 1
-    // addMarkerShapeFile("../data/municipalnew.zip", municipalMarkers); //layer 2
-    // addMarkerShapeFile("../data/privatenew.zip", privateMarkers); //layer 3
-    // addMarkerShapeFile("../data/composting_facilities.zip", compostMarkers); //layer 4
-    addMarkerShapeFile("../data/chargeStations.zip", chargeStations); //layer 0
+        //load out shapefiles, having to keep track of the layers here is probably the dumbest thing I've done
+        // addPolygonShapeFile("../data/wasteday.zip"); //layer 0
+        // addPolygonShapeFile("../data/LeafYardServices.zip"); //layer 1
+        // addMarkerShapeFile("../data/municipalnew.zip", municipalMarkers); //layer 2
+        // addMarkerShapeFile("../data/privatenew.zip", privateMarkers); //layer 3
+        // addMarkerShapeFile("../data/composting_facilities.zip", compostMarkers); //layer 4
+        addMarkerShapeFile("../data/chargeStations.zip", chargeStations); //layer 0
+        toggleLayer(0);
 
-    __map.invalidateSize(); //just in case that bug rears it's ugly head
-    //load our buttons
-    addHomeButton();
-    addFindMeButton();
+        __map.invalidateSize(); //just in case that bug rears it's ugly head
+        //load our buttons
+        addHomeButton();
+        addFindMeButton();
+
+
+        __map.on('click', onMapClick);
+    });
 }
 
 
 //console.dir(privateMarkers);
 mapSetup();
-__map.on('click', onMapClick);
-//default opened layers
-toggleLayer(0);
-// getIso([0, 0]);
