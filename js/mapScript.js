@@ -3,10 +3,7 @@ var __zoomLevel = 12;
 var __map;
 var __shapeLayers = [];
 var __activatedLayers = [];
-var compostMarkers = [];
-var landfillMarkers = [];
-var municipalMarkers = [];
-var privateMarkers = [];
+var chargeStations = [];
 var geolocation = undefined;
 var dirLayer = undefined;
 var accessToken = "nothing";
@@ -15,22 +12,11 @@ var directionStr = "";
 var customWaypoint;
 var geoMarker;
 
-var compostIcon = L.icon({
-    iconUrl: './img/compostingMarker.png',
+var chargeIcon = L.icon({
+    iconUrl: './img/chargeIcon.png',
     iconSize: [32, 32]
 });
-var landfillIcon = L.icon({
-    iconUrl: './img/garbageMarkers.png',
-    iconSize: [32, 32]
-});
-var municipalIcon = L.icon({
-    iconUrl: './img/municipal.png',
-    iconSize: [32, 32]
-});
-var privateIcon = L.icon({
-    iconUrl: './img/private.png',
-    iconSize: [32, 32]
-});
+
 
 var garLegendActive = false;
 var leafLegendActive = false;
@@ -239,15 +225,10 @@ function addMarkerShapeFile(path, arr) { //generic function to add shapeFiles to
     var shpfile = new L.Shapefile(path, {
         onEachFeature: function(feature, layer) {
             if (feature.properties) {
-                if (arr === compostMarkers) {
-                    layer.setIcon(compostIcon);
-                } else if (arr === landfillMarkers) {
-                    layer.setIcon(landfillIcon);
-                } else if (arr === municipalMarkers) {
-                    layer.setIcon(municipalIcon);
-                } else if (arr === privateMarkers) {
-                    layer.setIcon(privateIcon);
+                if (arr === chargeStations) {
+                    layer.setIcon(chargeIcon);
                 }
+                
                 arr.push(feature);
                 layer.bindPopup(Object.keys(feature.properties).map(function(k) {
                     return "<div><span class=\"markerTitle\"><b>" + k + "</b></span>" + "<span class=\"markerText\">" + feature.properties[k] + "</span>";
@@ -269,26 +250,6 @@ function addMarkerShapeFile(path, arr) { //generic function to add shapeFiles to
 
 
 function toggleLayer(index) {
-    if (index === 0) {
-        if (garLegendActive) {
-            __map.removeControl(garLegend);
-            garLegendActive = false;
-        } else if (!garLegendActive) {
-            garLegend.addTo(__map);
-            garLegendActive = true;
-        }
-    }
-
-    if (index === 1) {
-        if (leafLegendActive) {
-            __map.removeControl(leafLegend);
-            leafLegendActive = false;
-        } else if (!leafLegendActive) {
-            leafLegend.addTo(__map);
-            leafLegendActive = true;
-        }
-    }
-
     if (geolocation != undefined) {
         __map.removeLayer(geolocation);
     } else {
@@ -341,47 +302,12 @@ function findMe() {
     }
 }
 
-function addClearDirButton() {
-    L.easyButton('icon ion-android-close', function() {
-        clearDirections();
-    },
-    "Clear directions and custom waypoint").addTo(__map);
-}
 
 function addFindMeButton() {
     L.easyButton('icon ion-pin larger', function() {
             findMe();
         },
         "Find my location").addTo(__map);
-}
-
-function addMunicipalRecyclingButton() {
-    //icon icon-refresh larger
-    L.easyButton('icon ion-cube larger', function() {
-            toggleLayer(2);
-        },
-        "Display municipal recycling locations").addTo(__map);
-}
-
-function addPrivateRecyclingButton() {
-    L.easyButton('icon ion-loop larger', function() {
-            toggleLayer(3);
-        },
-        "Display private recycling locations").addTo(__map);
-}
-
-function addCompostButton() {
-    L.easyButton("icon ion-leaf larger", function() {
-            toggleLayer(4);
-        },
-        "Display composting facility locations").addTo(__map);
-}
-
-function addLandFillButton() {
-    L.easyButton("icon ion-android-delete larger", function() {
-            toggleLayer(5);
-        },
-        "Display landfill locations").addTo(__map);
 }
 
 function addHomeButton() {
@@ -416,8 +342,10 @@ function getDistance(pos1, pos2) { //using the haversine formula!
 function findNearestMarker(position, featureArr) {
     var lowestIndex = 0;
     var lowestDistance = Infinity; //good luck being greater than that!
+    console.log(featureArr[4]);
     for (var i = 0; i < featureArr.length; i++) {
         featureCoords = [featureArr[i].geometry.coordinates[1], featureArr[i].geometry.coordinates[0]]; //for some reason it stores them backwards, beats me im just a code monkey
+        // console.log(featureCoords);
         var distance = getDistance([position.coords.latitude, position.coords.longitude], featureCoords);
         if (distance < lowestDistance) {
             lowestDistance = distance;
@@ -425,13 +353,13 @@ function findNearestMarker(position, featureArr) {
         }
     }
     var nearestName = "";
-    if (featureArr[lowestIndex].properties.Name) {
-        nearestName = featureArr[lowestIndex].properties.Name;
+    if (featureArr[lowestIndex].properties.HOST) {
+        nearestName = featureArr[lowestIndex].properties.HOST;
     } else {
         nearestName = "Nameless";
     }
 
-    var nearestAddress = featureArr[lowestIndex].properties.Address;
+    var nearestAddress = featureArr[lowestIndex].properties.ADDRESS;
     var htmlAddressBeginning = "<a onclick=\"addressGeocode([" + position.coords.latitude + ", " + position.coords.longitude + "],&#34;" + nearestAddress + "&#34;)\"" + " href=\"javascript:void(0)\">";
     // console.log(htmlAddressBeginning);
     var htmlAddressEnding = "</a>";
@@ -449,6 +377,7 @@ function requestToken() {
     realPromise.then(function(val) {
         valObj = JSON.parse(val);
         accessToken = valObj.access_token;
+        console.error(accessToken);
     });
 }
 
@@ -479,31 +408,52 @@ function showDirections(startCoords, endCoords) {
     });
 }
 
-function changeWaypointText(directions) {
-    // console.log(Object.keys(directions));
-    customString = "";
-    for (var i = 0; i < Object.keys(directions).length; i++) {
-        directions[i].attributes.text.replace(/Location 2/i, "diestination");
-        customString += "<b>" + i + "</b>: " + directions[i].attributes.text + "<br>";
-        console.log(directions[i].attributes.text);
-    }
-
-    if (customWaypoint != undefined) {
-        customWaypoint.getPopup().setContent(customString);
-    } else if (geoMarker.getPopup() != undefined) {
-        geoMarker.getPopup().setContent(customString);
-    }
-    // console.log(geoMarker.getPopup());
+function getIso(position) {
+    console.log("Making iso at " + position[0] + position[1]);
+    var facilities = position[0] + ", " + position[1] + ";";
+    var getPromise = $.get("https://route.arcgis.com/arcgis/rest/services/World/ServiceAreas/NAServer/ServiceArea_World/solveServiceArea", {
+        "token": accessToken,
+        "facilities": facilities,
+        "f": "json"
+    })
+    var realPromise = Promise.resolve(getPromise);
+    realPromise.then(function(val) {
+        valObj = JSON.parse(val);
+        console.log(valObj);
+    });
 }
 
-function clearDirections() {
-    for (var i = 0; i < directionLayers.length; i++) {
-        __map.removeLayer(directionLayers[i]);
-    }
-    if (customWaypoint != undefined) {
-        __map.removeLayer(customWaypoint);
-        customWaypoint = undefined;    
-    }
+function test() {
+    position = [0, 0];
+    console.log("Making iso at " + position[0] + position[1]);
+    var facilities = position[0] + ", " + position[1] + ";";
+    var getPromise = $.get("http://route.arcgis.com/arcgis/rest/services/World/ServiceAreas/NAServer/ServiceArea_World/solveServiceArea?token=" + accessToken + "&facilities=-122.253,37.757&outSR=102100&f=json");
+    var realPromise = Promise.resolve(getPromise);
+    realPromise.then(function(val) {
+        valObj = JSON.parse(val);
+        console.log(valObj);
+    });
+}
+
+function showDirections(startCoords, endCoords) {
+    console.log("routing from: " + startCoords + "to: " + endCoords);
+    // openSpecPopup(endCoords);
+    var stops = startCoords[1] + ", " + startCoords[0] + "; " + endCoords[1] + ", " + endCoords[0];
+    var getPromise = $.get("http://route.arcgis.com/arcgis/rest/services/World/Route/NAServer/Route_World/solve", {
+        "token": accessToken,
+        "stops": stops,
+        "f": "json"
+    })
+    var realPromise = Promise.resolve(getPromise);
+    realPromise.then(function(val) {
+        valObj = JSON.parse(val);
+        // console.log(valObj);
+        directionPoints = valObj.routes.features[0].geometry.paths[0];
+        directionStr = valObj.directions[0].features;
+        // console.log(directionStr);
+        drawDirections(directionPoints);
+        changeWaypointText(directionStr);
+    });
 }
 
 function drawDirections(points) {
@@ -524,28 +474,30 @@ function drawDirections(points) {
     }
 }
 
-function fetchDirections(startCoords, endAddress) { //helper function since this is asynchronous and that still blows my mind
-    addressGeocode(endAddress);
+function changeWaypointText(directions) {
+    customString = "";
+    for (var i = 0; i < Object.keys(directions).length; i++) {
+        directions[i].attributes.text.replace(/Location 2/i, "Destination");
+        customString += "<b>" + i + "</b>: " + directions[i].attributes.text + "<br>";
+        console.log(directions[i].attributes.text);
+    }
+
+    if (customWaypoint != undefined) {
+        customWaypoint.getPopup().setContent(customString);
+    } else if (geoMarker.getPopup() != undefined) {
+        geoMarker.getPopup().setContent(customString);
+    }
+    // console.log(geoMarker.getPopup());
 }
 
 function onMapClick(e) {
-    if (customWaypoint != undefined) { //we've made one before
-        console.log(customWaypoint);
-        if (typeof(customWaypoint._latlng)!='undefined') { 
-            //popup is open
-            showDirections([customWaypoint._latlng.lat,customWaypoint._latlng.lng], [e.latlng.lat, e.latlng.lng]);
+    if (customWaypoint) {
+        __map.removeLayer(customWaypoint);
+        for (var i = 0; i < directionLayers.length; i++) {
+        __map.removeLayer(directionLayers[i]);
         }
-        else {
-            //popup is closed
-            // so we can make a new one
-            makeCustomWaypointPopup(e);
-        }
-    } else {
-        //it's never existed so we can make a new one
-        makeCustomWaypointPopup(e);
     }
-
-    
+    makeCustomWaypointPopup(e);
 }
 
 function makeCustomWaypointPopup(e) {
@@ -556,41 +508,37 @@ function makeCustomWaypointPopup(e) {
                 longitude: e.latlng.lng
             }
         }
-    customWaypoint.bindPopup("<b><center>This is your custom waypoint at " + e.latlng.lat + "," + e.latlng.lng + "</center></b><br> The <b>nearest private</b> recycling location is " + findNearestMarker(position, privateMarkers) + "The <b>nearest municipal</b> recycling location is " + findNearestMarker(position, municipalMarkers));
+    customWaypoint.bindPopup("<b><center>This is your custom waypoint at " + e.latlng.lat + "," + e.latlng.lng + "</center></b><br> The <b>nearest charging station</b> is " + findNearestMarker(position, chargeStations));
     customWaypoint.openPopup();
 }
 
+function parseJsonPoints() {
+
+}
 
 function mapSetup() {
     requestToken();
     loadMap(); //loads map and adds it to div
+    test();
 
     //load out shapefiles, having to keep track of the layers here is probably the dumbest thing I've done
-    addPolygonShapeFile("../data/wasteday.zip"); //layer 0
-    addPolygonShapeFile("../data/LeafYardServices.zip"); //layer 1
-    addMarkerShapeFile("../data/municipalnew.zip", municipalMarkers); //layer 2
-    addMarkerShapeFile("../data/privatenew.zip", privateMarkers); //layer 3
-    addMarkerShapeFile("../data/composting_facilities.zip", compostMarkers); //layer 4
-    addMarkerShapeFile("../data/landfills.zip", landfillMarkers); //layer 5
+    // addPolygonShapeFile("../data/wasteday.zip"); //layer 0
+    // addPolygonShapeFile("../data/LeafYardServices.zip"); //layer 1
+    // addMarkerShapeFile("../data/municipalnew.zip", municipalMarkers); //layer 2
+    // addMarkerShapeFile("../data/privatenew.zip", privateMarkers); //layer 3
+    // addMarkerShapeFile("../data/composting_facilities.zip", compostMarkers); //layer 4
+    addMarkerShapeFile("../data/chargeStations.zip", chargeStations); //layer 0
 
     __map.invalidateSize(); //just in case that bug rears it's ugly head
     //load our buttons
     addHomeButton();
     addFindMeButton();
-    addPrivateRecyclingButton();
-    addMunicipalRecyclingButton();
-    addCompostButton();
-    addLandFillButton();
-    addClearDirButton();
-
 }
 
 
 //console.dir(privateMarkers);
-
 mapSetup();
 __map.on('click', onMapClick);
 //default opened layers
-for (var i = 2; i <= 5; i++) {
-    toggleLayer(i);
-}
+toggleLayer(0);
+// getIso([0, 0]);
