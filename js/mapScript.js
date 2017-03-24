@@ -466,11 +466,13 @@ function parseJSONCars() {
             var cell2 = row.insertCell(1);
             var cell3 = row.insertCell(2); 
             var cell4 = row.insertCell(3);
+            var cell5 = row.insertCell(4);
 
             cell1.innerHTML = carInfo[i].Make;
-            cell2.innerHTML = carInfo[i].Model;
-            cell3.innerHTML = carInfo[i].Range_km;
-            cell4.innerHTML = carInfo[i].Recharge_Time_hr;
+            cell2.innerHTML = carInfo[i].Year;
+            cell3.innerHTML = carInfo[i].Model;
+            cell4.innerHTML = carInfo[i].Range_km;
+            cell5.innerHTML = carInfo[i].Recharge_Time_hr;
         }
     });
 }
