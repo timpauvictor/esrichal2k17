@@ -1,5 +1,5 @@
 var __startingCoords = [43.240, -79.848];
-var __zoomLevel = 12;
+var __zoomLevel = 5;
 var __map;
 var __shapeLayers = [];
 var __activatedLayers = [];
@@ -429,7 +429,7 @@ function makeCustomWaypointPopup(e) {
 function parseJsonPoints() {
     $.getJSON('../data/openChargeMap.json', function(response) {
         chargeMap = response;
-        // console.log(chargeMap[1300]);
+        console.log(chargeMap[1300]);
 
 
         for (i in chargeMap) {
