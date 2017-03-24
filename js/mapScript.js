@@ -227,7 +227,7 @@ function findMe() {
                 __map.removeLayer(geolocation);
             }
             geoMarker = L.marker([position.coords.latitude, position.coords.longitude]).addTo(__map);
-            geoMarker.bindPopup("<b><center>This is you!</center></b><br>");
+            geoMarker.bindPopup("<b><center>This is you!</center></b><br> The nearest charging station to you is " + findNearestMarker(position, chargeStations));
             // marker.openPopup();
             geolocation = geoMarker;
             __map.setView([position.coords.latitude, position.coords.longitude], 16)
