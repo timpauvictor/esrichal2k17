@@ -1,0 +1,597 @@
+[
+  {
+    "Make": "TESLA",
+    "Year": 2017,
+    "Model": "MODEL S 100D",
+    "Recharge_Time_hr": 12,
+    "Range_km": 539
+  },
+  {
+    "Make": "TESLA",
+    "Year": 2016,
+    "Model": "MODEL S P100D",
+    "Recharge_Time_hr": 12,
+    "Range_km": 507
+  },
+  {
+    "Make": "TESLA",
+    "Year": 2017,
+    "Model": "MODEL S P100D",
+    "Recharge_Time_hr": 12,
+    "Range_km": 507
+  },
+  {
+    "Make": "TESLA",
+    "Year": 2016,
+    "Model": "MODEL S 90D (Refresh)",
+    "Recharge_Time_hr": 12,
+    "Range_km": 473
+  },
+  {
+    "Make": "TESLA",
+    "Year": 2017,
+    "Model": "MODEL S 90D",
+    "Recharge_Time_hr": 12,
+    "Range_km": 473
+  },
+  {
+    "Make": "TESLA",
+    "Year": 2016,
+    "Model": "MODEL X P100D",
+    "Recharge_Time_hr": 12,
+    "Range_km": 465
+  },
+  {
+    "Make": "TESLA",
+    "Year": 2017,
+    "Model": "MODEL X P100D",
+    "Recharge_Time_hr": 12,
+    "Range_km": 465
+  },
+  {
+    "Make": "TESLA",
+    "Year": 2015,
+    "Model": "MODEL S 85D/90D",
+    "Recharge_Time_hr": 12,
+    "Range_km": 435
+  },
+  {
+    "Make": "TESLA",
+    "Year": 2016,
+    "Model": "MODEL S 85D/90D",
+    "Recharge_Time_hr": 12,
+    "Range_km": 435
+  },
+  {
+    "Make": "TESLA",
+    "Year": 2016,
+    "Model": "MODEL S P90D (Refresh)",
+    "Recharge_Time_hr": 12,
+    "Range_km": 435
+  },
+  {
+    "Make": "TESLA",
+    "Year": 2017,
+    "Model": "MODEL S P90D",
+    "Recharge_Time_hr": 12,
+    "Range_km": 435
+  },
+  {
+    "Make": "TESLA",
+    "Year": 2013,
+    "Model": "MODEL S (85 kWh battery)",
+    "Recharge_Time_hr": 12,
+    "Range_km": 426
+  },
+  {
+    "Make": "TESLA",
+    "Year": 2013,
+    "Model": "MODEL S PERFORMANCE",
+    "Recharge_Time_hr": 12,
+    "Range_km": 426
+  },
+  {
+    "Make": "TESLA",
+    "Year": 2014,
+    "Model": "MODEL S (85 kWh battery)",
+    "Recharge_Time_hr": 12,
+    "Range_km": 426
+  },
+  {
+    "Make": "TESLA",
+    "Year": 2014,
+    "Model": "MODEL S PERFORMANCE",
+    "Recharge_Time_hr": 12,
+    "Range_km": 426
+  },
+  {
+    "Make": "TESLA",
+    "Year": 2015,
+    "Model": "MODEL S (85/90 kWh battery)",
+    "Recharge_Time_hr": 12,
+    "Range_km": 426
+  },
+  {
+    "Make": "TESLA",
+    "Year": 2016,
+    "Model": "MODEL S (85/90 kWh battery)",
+    "Recharge_Time_hr": 12,
+    "Range_km": 426
+  },
+  {
+    "Make": "TESLA",
+    "Year": 2016,
+    "Model": "MODEL S 75D",
+    "Recharge_Time_hr": 12,
+    "Range_km": 417
+  },
+  {
+    "Make": "TESLA",
+    "Year": 2017,
+    "Model": "MODEL S 75D",
+    "Recharge_Time_hr": 12,
+    "Range_km": 417
+  },
+  {
+    "Make": "TESLA",
+    "Year": 2016,
+    "Model": "MODEL X 90D",
+    "Recharge_Time_hr": 12,
+    "Range_km": 414
+  },
+  {
+    "Make": "TESLA",
+    "Year": 2017,
+    "Model": "MODEL X 90D",
+    "Recharge_Time_hr": 12,
+    "Range_km": 414
+  },
+  {
+    "Make": "TESLA",
+    "Year": 2015,
+    "Model": "MODEL S P85D/P90D",
+    "Recharge_Time_hr": 12,
+    "Range_km": 407
+  },
+  {
+    "Make": "TESLA",
+    "Year": 2016,
+    "Model": "MODEL S P85D/P90D",
+    "Recharge_Time_hr": 12,
+    "Range_km": 407
+  },
+  {
+    "Make": "TESLA",
+    "Year": 2016,
+    "Model": "MODEL X P90D",
+    "Recharge_Time_hr": 12,
+    "Range_km": 402
+  },
+  {
+    "Make": "TESLA",
+    "Year": 2017,
+    "Model": "MODEL X P90D",
+    "Recharge_Time_hr": 12,
+    "Range_km": 402
+  },
+  {
+    "Make": "TESLA",
+    "Year": 2016,
+    "Model": "MODEL S (75 kWh battery)",
+    "Recharge_Time_hr": 12,
+    "Range_km": 401
+  },
+  {
+    "Make": "TESLA",
+    "Year": 2017,
+    "Model": "MODEL S (75 kWh battery)",
+    "Recharge_Time_hr": 12,
+    "Range_km": 401
+  },
+  {
+    "Make": "TESLA",
+    "Year": 2015,
+    "Model": "MODEL S 70D",
+    "Recharge_Time_hr": 12,
+    "Range_km": 386
+  },
+  {
+    "Make": "TESLA",
+    "Year": 2016,
+    "Model": "MODEL S 70D",
+    "Recharge_Time_hr": 12,
+    "Range_km": 386
+  },
+  {
+    "Make": "TESLA",
+    "Year": 2016,
+    "Model": "MODEL X 75D",
+    "Recharge_Time_hr": 12,
+    "Range_km": 383
+  },
+  {
+    "Make": "CHEVROLET",
+    "Year": 2017,
+    "Model": "BOLT EV",
+    "Recharge_Time_hr": 9.3,
+    "Range_km": 383
+  },
+  {
+    "Make": "TESLA",
+    "Year": 2017,
+    "Model": "MODEL X 75D",
+    "Recharge_Time_hr": 12,
+    "Range_km": 383
+  },
+  {
+    "Make": "TESLA",
+    "Year": 2015,
+    "Model": "MODEL S (70 kWh battery)",
+    "Recharge_Time_hr": 12,
+    "Range_km": 377
+  },
+  {
+    "Make": "TESLA",
+    "Year": 2016,
+    "Model": "MODEL S (70 kWh battery)",
+    "Recharge_Time_hr": 12,
+    "Range_km": 377
+  },
+  {
+    "Make": "TESLA",
+    "Year": 2016,
+    "Model": "MODEL S 60D",
+    "Recharge_Time_hr": 10,
+    "Range_km": 351
+  },
+  {
+    "Make": "TESLA",
+    "Year": 2017,
+    "Model": "MODEL S 60D",
+    "Recharge_Time_hr": 10,
+    "Range_km": 351
+  },
+  {
+    "Make": "TESLA",
+    "Year": 2016,
+    "Model": "MODEL S (60 kWh battery from 6/16)",
+    "Recharge_Time_hr": 10,
+    "Range_km": 338
+  },
+  {
+    "Make": "TESLA",
+    "Year": 2017,
+    "Model": "MODEL S (60 kWh battery)",
+    "Recharge_Time_hr": 10,
+    "Range_km": 338
+  },
+  {
+    "Make": "TESLA",
+    "Year": 2013,
+    "Model": "MODEL S (60 kWh battery)",
+    "Recharge_Time_hr": 10,
+    "Range_km": 335
+  },
+  {
+    "Make": "TESLA",
+    "Year": 2014,
+    "Model": "MODEL S (60 kWh battery)",
+    "Recharge_Time_hr": 10,
+    "Range_km": 335
+  },
+  {
+    "Make": "TESLA",
+    "Year": 2015,
+    "Model": "MODEL S (60 kWh battery)",
+    "Recharge_Time_hr": 10,
+    "Range_km": 335
+  },
+  {
+    "Make": "TESLA",
+    "Year": 2016,
+    "Model": "MODEL S (60 kWh battery pre- 6/16)",
+    "Recharge_Time_hr": 10,
+    "Range_km": 335
+  },
+  {
+    "Make": "TESLA",
+    "Year": 2016,
+    "Model": "MODEL X 60D",
+    "Recharge_Time_hr": 10,
+    "Range_km": 322
+  },
+  {
+    "Make": "TESLA",
+    "Year": 2017,
+    "Model": "MODEL X 60D",
+    "Recharge_Time_hr": 10,
+    "Range_km": 322
+  },
+  {
+    "Make": "TESLA",
+    "Year": 2013,
+    "Model": "MODEL S (40 kWh battery)",
+    "Recharge_Time_hr": 6,
+    "Range_km": 224
+  },
+  {
+    "Make": "FORD",
+    "Year": 2017,
+    "Model": "FOCUS ELECTRIC",
+    "Recharge_Time_hr": 5.5,
+    "Range_km": 185
+  },
+  {
+    "Make": "BMW",
+    "Year": 2017,
+    "Model": "i3 (94 Ah)",
+    "Recharge_Time_hr": 5,
+    "Range_km": 183
+  },
+  {
+    "Make": "NISSAN",
+    "Year": 2016,
+    "Model": "LEAF (30 kWh battery)",
+    "Recharge_Time_hr": 6,
+    "Range_km": 172
+  },
+  {
+    "Make": "NISSAN",
+    "Year": 2017,
+    "Model": "LEAF",
+    "Recharge_Time_hr": 6,
+    "Range_km": 172
+  },
+  {
+    "Make": "BMW",
+    "Year": 2017,
+    "Model": "i3 REX (94 Ah)",
+    "Recharge_Time_hr": 5,
+    "Range_km": 156
+  },
+  {
+    "Make": "KIA",
+    "Year": 2017,
+    "Model": "SOUL EV",
+    "Recharge_Time_hr": 4,
+    "Range_km": 150
+  },
+  {
+    "Make": "KIA",
+    "Year": 2015,
+    "Model": "SOUL EV",
+    "Recharge_Time_hr": 4,
+    "Range_km": 149
+  },
+  {
+    "Make": "KIA",
+    "Year": 2016,
+    "Model": "SOUL EV",
+    "Recharge_Time_hr": 4,
+    "Range_km": 149
+  },
+  {
+    "Make": "NISSAN",
+    "Year": 2014,
+    "Model": "LEAF",
+    "Recharge_Time_hr": 5,
+    "Range_km": 135
+  },
+  {
+    "Make": "NISSAN",
+    "Year": 2015,
+    "Model": "LEAF",
+    "Recharge_Time_hr": 5,
+    "Range_km": 135
+  },
+  {
+    "Make": "NISSAN",
+    "Year": 2016,
+    "Model": "LEAF (24 kWh battery)",
+    "Recharge_Time_hr": 5,
+    "Range_km": 135
+  },
+  {
+    "Make": "CHEVROLET",
+    "Year": 2014,
+    "Model": "SPARK EV",
+    "Recharge_Time_hr": 7,
+    "Range_km": 131
+  },
+  {
+    "Make": "CHEVROLET",
+    "Year": 2015,
+    "Model": "SPARK EV",
+    "Recharge_Time_hr": 7,
+    "Range_km": 131
+  },
+  {
+    "Make": "CHEVROLET",
+    "Year": 2016,
+    "Model": "SPARK EV",
+    "Recharge_Time_hr": 7,
+    "Range_km": 131
+  },
+  {
+    "Make": "BMW",
+    "Year": 2015,
+    "Model": "i3",
+    "Recharge_Time_hr": 4,
+    "Range_km": 130
+  },
+  {
+    "Make": "BMW",
+    "Year": 2016,
+    "Model": "i3",
+    "Recharge_Time_hr": 4,
+    "Range_km": 130
+  },
+  {
+    "Make": "BMW",
+    "Year": 2017,
+    "Model": "i3 (60 Ah)",
+    "Recharge_Time_hr": 4,
+    "Range_km": 130
+  },
+  {
+    "Make": "FORD",
+    "Year": 2013,
+    "Model": "FOCUS ELECTRIC",
+    "Recharge_Time_hr": 4,
+    "Range_km": 122
+  },
+  {
+    "Make": "FORD",
+    "Year": 2014,
+    "Model": "FOCUS ELECTRIC",
+    "Recharge_Time_hr": 4,
+    "Range_km": 122
+  },
+  {
+    "Make": "FORD",
+    "Year": 2015,
+    "Model": "FOCUS ELECTRIC",
+    "Recharge_Time_hr": 4,
+    "Range_km": 122
+  },
+  {
+    "Make": "FORD",
+    "Year": 2016,
+    "Model": "FOCUS ELECTRIC",
+    "Recharge_Time_hr": 4,
+    "Range_km": 122
+  },
+  {
+    "Make": "NISSAN",
+    "Year": 2012,
+    "Model": "LEAF",
+    "Recharge_Time_hr": 7,
+    "Range_km": 117
+  },
+  {
+    "Make": "NISSAN",
+    "Year": 2013,
+    "Model": "LEAF",
+    "Recharge_Time_hr": 7,
+    "Range_km": 117
+  },
+  {
+    "Make": "BMW",
+    "Year": 2015,
+    "Model": "i3 REX",
+    "Recharge_Time_hr": 4,
+    "Range_km": 116
+  },
+  {
+    "Make": "BMW",
+    "Year": 2016,
+    "Model": "i3 REX",
+    "Recharge_Time_hr": 4,
+    "Range_km": 116
+  },
+  {
+    "Make": "SMART",
+    "Year": 2013,
+    "Model": "FORTWO ELECTRIC DRIVE CABRIOLET",
+    "Recharge_Time_hr": 8,
+    "Range_km": 109
+  },
+  {
+    "Make": "SMART",
+    "Year": 2013,
+    "Model": "FORTWO ELECTRIC DRIVE COUPE",
+    "Recharge_Time_hr": 8,
+    "Range_km": 109
+  },
+  {
+    "Make": "SMART",
+    "Year": 2014,
+    "Model": "FORTWO ELECTRIC DRIVE CABRIOLET",
+    "Recharge_Time_hr": 8,
+    "Range_km": 109
+  },
+  {
+    "Make": "SMART",
+    "Year": 2014,
+    "Model": "FORTWO ELECTRIC DRIVE COUPE",
+    "Recharge_Time_hr": 8,
+    "Range_km": 109
+  },
+  {
+    "Make": "SMART",
+    "Year": 2015,
+    "Model": "FORTWO ELECTRIC DRIVE CABRIOLET",
+    "Recharge_Time_hr": 8,
+    "Range_km": 109
+  },
+  {
+    "Make": "SMART",
+    "Year": 2015,
+    "Model": "FORTWO ELECTRIC DRIVE COUPE",
+    "Recharge_Time_hr": 8,
+    "Range_km": 109
+  },
+  {
+    "Make": "SMART",
+    "Year": 2016,
+    "Model": "FORTWO ELECTRIC DRIVE CABRIOLET",
+    "Recharge_Time_hr": 8,
+    "Range_km": 109
+  },
+  {
+    "Make": "SMART",
+    "Year": 2016,
+    "Model": "FORTWO ELECTRIC DRIVE COUPE",
+    "Recharge_Time_hr": 8,
+    "Range_km": 109
+  },
+  {
+    "Make": "MITSUBISHI",
+    "Year": 2012,
+    "Model": "i-MiEV",
+    "Recharge_Time_hr": 7,
+    "Range_km": 100
+  },
+  {
+    "Make": "MITSUBISHI",
+    "Year": 2013,
+    "Model": "i-MiEV",
+    "Recharge_Time_hr": 7,
+    "Range_km": 100
+  },
+  {
+    "Make": "MITSUBISHI",
+    "Year": 2014,
+    "Model": "i-MiEV",
+    "Recharge_Time_hr": 7,
+    "Range_km": 100
+  },
+  {
+    "Make": "MITSUBISHI",
+    "Year": 2015,
+    "Model": "i-MiEV",
+    "Recharge_Time_hr": 7,
+    "Range_km": 100
+  },
+  {
+    "Make": "MITSUBISHI",
+    "Year": 2016,
+    "Model": "i-MiEV",
+    "Recharge_Time_hr": 7,
+    "Range_km": 100
+  },
+  {
+    "Make": "MITSUBISHI",
+    "Year": 2017,
+    "Model": "i-MiEV",
+    "Recharge_Time_hr": 7,
+    "Range_km": 100
+  },
+  {
+    "Make": "",
+    "Year": "",
+    "Model": "",
+    "Recharge_Time_hr": "",
+    "Range_km": ""
+  }
+]

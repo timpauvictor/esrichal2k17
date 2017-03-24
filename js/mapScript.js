@@ -278,7 +278,7 @@ function getDistance(pos1, pos2) { //using the haversine formula!
 function findNearestMarker(position, featureArr) {
     var lowestIndex = 0;
     var lowestDistance = Infinity; //good luck being greater than that!
-    console.log(featureArr[4]);
+    // console.log(featureArr[4]);
     for (var i = 0; i < featureArr.length; i++) {
         featureCoords = [featureArr[i].geometry.coordinates[1], featureArr[i].geometry.coordinates[0]]; //for some reason it stores them backwards, beats me im just a code monkey
         // console.log(featureCoords);
@@ -344,40 +344,6 @@ function showDirections(startCoords, endCoords) {
     });
 }
 
-function getIso(position) {
-    console.log("Making iso at " + position[0] + position[1]);
-    var facilities = position[0] + ", " + position[1] + ";";
-    var getPromise = $.get("https://route.arcgis.com/arcgis/rest/services/World/ServiceAreas/NAServer/ServiceArea_World/solveServiceArea", {
-        "token": accessToken,
-        "facilities": facilities,
-        "f": "json"
-    })
-    var realPromise = Promise.resolve(getPromise);
-    realPromise.then(function(val) {
-        valObj = JSON.parse(val);
-        console.log(valObj);
-        drawIso(valObj);
-    });
-}
-
-function test() {
-    position = __startingCoords;
-    console.log("Making iso at " + position[0] + position[1]);
-    var facilities = position[0] + ", " + position[1] + ";";
-    var getPromise = $.get("http://route.arcgis.com/arcgis/rest/services/World/ServiceAreas/NAServer/ServiceArea_World/solveServiceArea?token=" + accessToken + "&facilities=" + position[1] + "," + position[0] + "&outSR=102100&f=json");
-    var realPromise = Promise.resolve(getPromise);
-    realPromise.then(function(val) {
-        valObj = JSON.parse(val);
-        console.log(valObj);
-        drawIso(valObj);
-        // __map.addLayer(L.GeoJSON(valObj));
-        // toggleLayer(1);
-        // var driveTimes = L.featureGroup();
-        // __map.addLayer(driveTimes);
-        // console.log(L);
-    });
-}
-
 function showDirections(startCoords, endCoords) {
     console.log("routing from: " + startCoords + "to: " + endCoords);
     // openSpecPopup(endCoords);
@@ -415,34 +381,6 @@ function drawDirections(points) {
         directionLayers.push(myPolyline);
         myPolyline.addTo(__map);
     }
-}
-
-function drawIso(object) {
-    // var pointsList;
-    // var currentFeature;
-    // // console.log()
-    // // console.log(object);
-    // for (var j in object.saPolygons.features) {
-    //     currentFeature = object.saPolygons.features[j];
-    //     console.log(currentFeature);
-    //     for (var k in currentFeature.geometry.rings) {
-    //         currentRing = currentFeature.geometry.rings[k];
-    //         for (var l in currentRing)
-    //     }
-    // }
-
-    // for (var i = 0;  i < points.length - 1; i++) {
-    //     var pointA = new L.LatLng(points[i][1], points[i][0]);
-    //     var pointB = new L.LatLng(points[i+1][1], points[i+1][0]);
-    //     pointsList.append([pointA, pointB]);
-    // }
-    // var myPolgyon = L.polygon(pointsList, {
-    //     color: 'blue',
-    //     weight: 1,
-    //     opacity: 0.5,
-    //     smoothFactor: 1
-    // });
-    // myPolgyon.addTo(__map);
 }
 
 function changeWaypointText(directions) {
@@ -488,22 +426,32 @@ function makeCustomWaypointPopup(e) {
 }
 
 function parseJsonPoints() {
-
-}
-
-function test2() {
-    var gpService = L.esri.GP.service({
-    url: "https://sampleserver1.arcgisonline.com/ArcGIS/rest/services/Network/ESRI_DriveTime_US/GPServer/CreateDriveTimePolygons",
-    useCors:false
-  });
-   var gpTask = gpService.createTask();
-
-   gpTask.setParam("Drive_Times", "1 2");
-
-   var driveTimes = L.featureGroup();
-   __map.addLayer(driveTimes);
+    $.getJSON('../data/openChargeMap.json', function(response) {
+        chargeMap = response;
+        console.log(chargeMap[1300]);
 
 
+        for (i in chargeMap) {
+            var pos = [chargeMap[i].AddressInfo.Latitude, chargeMap[i].AddressInfo.Longitude];
+            console.log(pos);
+            var newWaypoint = L.marker(pos);
+            var toPush = {
+                geometry: {
+                    coordinates: [pos[1], pos[0]]
+                },
+                properties: {
+                    HOST: chargeMap[i].AddressInfo.Title,
+                    ADDRESS: chargeMap[i].AddressInfo.AddressLine1 + ", " + chargeMap[i].AddressInfo.Town + ", " + chargeMap[i].AddressInfo.StateOrProvince + ", " + chargeMap[i].AddressInfo.Postcode
+                }
+            };
+            chargeStations.push(toPush);
+            // return "<div><span class=\"markerTitle\"><b>" + label + "</b></span>" + "<span class=\"markerText\">" + feature.properties[k] + "</span>";
+
+            newWaypoint.bindPopup("<div><span class=\"markerTitle\"><b>" + toPush.properties.HOST + "</b></span><br>" + "<span class=\"markerText\">" + toPush.properties.ADDRESS + "</span>");
+            newWaypoint.setIcon(chargeIcon).addTo(__map);
+            // console.log(chargeStations);
+        }
+    });
 }
 
 function mapSetup() {
@@ -511,7 +459,8 @@ function mapSetup() {
         accessToken = JSON.parse(tokenData).access_token;
         loadMap(); //loads map and adds it to div
         // test();
-        test2();
+        parseJsonPoints();
+        // test2();
         // var myLayer = L.GeoJSON().addTo(__map);
 
         //load out shapefiles, having to keep track of the layers here is probably the dumbest thing I've done
@@ -520,8 +469,8 @@ function mapSetup() {
         // addMarkerShapeFile("../data/municipalnew.zip", municipalMarkers); //layer 2
         // addMarkerShapeFile("../data/privatenew.zip", privateMarkers); //layer 3
         // addMarkerShapeFile("../data/composting_facilities.zip", compostMarkers); //layer 4
-        addMarkerShapeFile("../data/chargeStations.zip", chargeStations); //layer 0
-        toggleLayer(0);
+        // addMarkerShapeFile("../data/chargeStations.zip", chargeStations); //layer 0
+        // toggleLayer(0);
 
         __map.invalidateSize(); //just in case that bug rears it's ugly head
         //load our buttons
