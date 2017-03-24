@@ -101,18 +101,18 @@
                 <div id="light" class="white_content">
                 <a href = "javascript:void(0)" onclick = "document.getElementById('light').style.display='none';document.getElementById('fade').style.display='none'" style="float: left; position: fixed; background-color: '#000000';">Close</a>
                     <center><img id="logo" src="./img/logo.png"/></center>
-                        <div class="mui-dropdown">
-                            Select your car model:<br> <button class="mui-btn mui-btn--primary" data-mui-toggle="dropdown">
-                                Model
-                                <span class="mui-caret"></span>
-                            </button>
-                            <ul class="mui-dropdown__menu">
-                                <li><a href="#">Option 1</a></li>
-                                <li><a href="#">Option 2</a></li>
-                                <li><a href="#">Option 3</a></li>
-                                <li><a href="#">Option 4</a></li>
-                            </ul>
-                            </div>
+                    <center>
+                        <table class="mdl-data-table mdl-js-data-table mdl-data-table mdl-shadow--2dp" id="carTable">
+                            <thead>
+                                <tr>
+                                <th class="mdl-data-table__cell--non-numeric">Make</th>
+                                <th>Model</th>
+                                <th>Battery Range</th>
+                                <th>Recharge Time</th>
+                                </tr>
+                            </thead>
+                            </table>
+                    </center>
 
                     </div>
                     <div id="fade" class="black_overlay"></div>

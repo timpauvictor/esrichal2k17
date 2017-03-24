@@ -11,6 +11,7 @@ var directionLayers = [];
 var directionStr = "";
 var customWaypoint;
 var geoMarker;
+var carinfo;
 
 var chargeIcon = L.icon({
     iconUrl: './img/chargeIcon.png',
@@ -226,7 +227,7 @@ function findMe() {
                 __map.removeLayer(geolocation);
             }
             geoMarker = L.marker([position.coords.latitude, position.coords.longitude]).addTo(__map);
-            geoMarker.bindPopup("<b><center>This is you!</center></b><br> The <b>nearest private</b> recycling location is " + findNearestMarker(position, privateMarkers) + "The <b>nearest municipal</b> recycling location is " + findNearestMarker(position, municipalMarkers));
+            geoMarker.bindPopup("<b><center>This is you!</center></b><br>");
             // marker.openPopup();
             geolocation = geoMarker;
             __map.setView([position.coords.latitude, position.coords.longitude], 16)
@@ -428,12 +429,12 @@ function makeCustomWaypointPopup(e) {
 function parseJsonPoints() {
     $.getJSON('../data/openChargeMap.json', function(response) {
         chargeMap = response;
-        console.log(chargeMap[1300]);
+        // console.log(chargeMap[1300]);
 
 
         for (i in chargeMap) {
             var pos = [chargeMap[i].AddressInfo.Latitude, chargeMap[i].AddressInfo.Longitude];
-            console.log(pos);
+            // console.log(pos);
             var newWaypoint = L.marker(pos);
             var toPush = {
                 geometry: {
@@ -454,11 +455,32 @@ function parseJsonPoints() {
     });
 }
 
+function parseJSONCars() {
+    $.getJSON("../data/carinfo.json", function(response) {
+        carInfo = response;
+        console.log(carInfo[1]);
+        var table = document.getElementById("carTable");
+        for (var i = 0; i < carInfo.length - 1; i++) {
+           var row = table.insertRow(1);
+            var cell1 = row.insertCell(0);
+            var cell2 = row.insertCell(1);
+            var cell3 = row.insertCell(2); 
+            var cell4 = row.insertCell(3);
+
+            cell1.innerHTML = carInfo[i].Make;
+            cell2.innerHTML = carInfo[i].Model;
+            cell3.innerHTML = carInfo[i].Range_km;
+            cell4.innerHTML = carInfo[i].Recharge_Time_hr;
+        }
+    });
+}
+
 function mapSetup() {
     requestToken().then( function(tokenData) {
         accessToken = JSON.parse(tokenData).access_token;
         loadMap(); //loads map and adds it to div
         // test();
+        parseJSONCars();
         parseJsonPoints();
         // test2();
         // var myLayer = L.GeoJSON().addTo(__map);
