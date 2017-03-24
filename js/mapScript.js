@@ -17,40 +17,6 @@ var chargeIcon = L.icon({
     iconSize: [32, 32]
 });
 
-
-function getYesNoColour(res) {
-    if (res === 'Yes') {
-        return '#4CAF50';
-    } else if (res === 'No') {
-        return '#f44336';
-    }
-}
-
-
-function getGarbageColor(garDay) {
-    if (garDay === "Monday") {
-
-        return '#66c2a5'
-
-    } else if (garDay === "Tuesday") {
-
-        return '#fc8d62'
-
-    } else if (garDay === "Wednesday") {
-
-        return '#8da0cb'
-
-    } else if (garDay === "Thursday") {
-
-        return '#e78ac3'
-
-    } else if (garDay === "Friday") {
-
-        return '#a6d854'
-
-    }
-}
-
 function loadMap() {
     __map = L.map("map").setView(__startingCoords, __zoomLevel);
     console.log('map created');
@@ -390,6 +356,7 @@ function getIso(position) {
     realPromise.then(function(val) {
         valObj = JSON.parse(val);
         console.log(valObj);
+        drawIso(valObj);
     });
 }
 
@@ -402,6 +369,12 @@ function test() {
     realPromise.then(function(val) {
         valObj = JSON.parse(val);
         console.log(valObj);
+        drawIso(valObj);
+        // __map.addLayer(L.GeoJSON(valObj));
+        // toggleLayer(1);
+        // var driveTimes = L.featureGroup();
+        // __map.addLayer(driveTimes);
+        // console.log(L);
     });
 }
 
@@ -444,6 +417,34 @@ function drawDirections(points) {
     }
 }
 
+function drawIso(object) {
+    // var pointsList;
+    // var currentFeature;
+    // // console.log()
+    // // console.log(object);
+    // for (var j in object.saPolygons.features) {
+    //     currentFeature = object.saPolygons.features[j];
+    //     console.log(currentFeature);
+    //     for (var k in currentFeature.geometry.rings) {
+    //         currentRing = currentFeature.geometry.rings[k];
+    //         for (var l in currentRing)
+    //     }
+    // }
+
+    // for (var i = 0;  i < points.length - 1; i++) {
+    //     var pointA = new L.LatLng(points[i][1], points[i][0]);
+    //     var pointB = new L.LatLng(points[i+1][1], points[i+1][0]);
+    //     pointsList.append([pointA, pointB]);
+    // }
+    // var myPolgyon = L.polygon(pointsList, {
+    //     color: 'blue',
+    //     weight: 1,
+    //     opacity: 0.5,
+    //     smoothFactor: 1
+    // });
+    // myPolgyon.addTo(__map);
+}
+
 function changeWaypointText(directions) {
     customString = "";
     for (var i = 0; i < Object.keys(directions).length; i++) {
@@ -468,6 +469,10 @@ function onMapClick(e) {
         }
     }
     makeCustomWaypointPopup(e);
+    var gettingIso = true;
+    if (gettingIso) {
+        
+    }
 }
 
 function makeCustomWaypointPopup(e) {
@@ -486,11 +491,28 @@ function parseJsonPoints() {
 
 }
 
+function test2() {
+    var gpService = L.esri.GP.service({
+    url: "https://sampleserver1.arcgisonline.com/ArcGIS/rest/services/Network/ESRI_DriveTime_US/GPServer/CreateDriveTimePolygons",
+    useCors:false
+  });
+   var gpTask = gpService.createTask();
+
+   gpTask.setParam("Drive_Times", "1 2");
+
+   var driveTimes = L.featureGroup();
+   __map.addLayer(driveTimes);
+
+
+}
+
 function mapSetup() {
     requestToken().then( function(tokenData) {
         accessToken = JSON.parse(tokenData).access_token;
         loadMap(); //loads map and adds it to div
-        test();
+        // test();
+        test2();
+        // var myLayer = L.GeoJSON().addTo(__map);
 
         //load out shapefiles, having to keep track of the layers here is probably the dumbest thing I've done
         // addPolygonShapeFile("../data/wasteday.zip"); //layer 0
@@ -510,6 +532,7 @@ function mapSetup() {
         __map.on('click', onMapClick);
     });
 }
+
 
 
 //console.dir(privateMarkers);

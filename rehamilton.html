@@ -78,7 +78,9 @@
                 </div>
                 <!-- Load ERSI Leaflet from CDN-->
                 <script src="http://cdn.leafletjs.com/leaflet/v1.0.0-beta.2/leaflet.js"></script>
-                <script src="//cdn.jsdelivr.net/leaflet.esri/2.0.0-beta.7/esri-leaflet.js"></script>
+                <script src="https://unpkg.com/esri-leaflet@2.0.8"></script>
+                <!-- Geoprocessing Plugin -->
+                <script src="https://unpkg.com/esri-leaflet-gp@2.0.1"></script>
                 <link rel="stylesheet" href="//cdn.jsdelivr.net/leaflet.esri.geocoder/2.0.3/esri-leaflet-geocoder.css">
                 <script src="//cdn.jsdelivr.net/leaflet.esri.geocoder/2.0.3/esri-leaflet-geocoder.js"></script>
                 <!-- <script src="https://www.promisejs.org/polyfills/promise-7.0.4.min.js"></script> -->
@@ -89,6 +91,11 @@
                 <script src="./js/leaflet-routing-machine.js"></script>
                 <script src="./js/mapScript.js"></script>
                 <!-- main javascript file that has been written by us -->
+                <div id="info-pane" class="leaflet-bar">
+                    <label>
+                    click on the map to calculate<br>1 and 2 minute drivetime polygons
+                    </label>
+                </div>
                 <div id="light" class="white_content">
                 <a href = "javascript:void(0)" onclick = "document.getElementById('light').style.display='none';document.getElementById('fade').style.display='none'" style="float: left; position: fixed; background-color: '#000000';">Close</a>
                     <center><img id="logo" src="./img/logo.png"/></center>
@@ -131,6 +138,7 @@
                     document.getElementById('fade').style.display='block';
                     </script>
                 </div>
+                
             </body>
         </html>
         <!-- Your content goes here -->
