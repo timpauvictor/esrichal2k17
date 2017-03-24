@@ -16,3 +16,10 @@ Other general functionalities are included on the left side of the screen, where
 
 This app was created with <b>love</b> (and javascript) by McMaster University students who understand the growing validity of sustainable transportation. Our inspiration for this app was the difficulty in finding a one-stop location for all information regarding both charging stations and available electric cars. <br>
 With E-Range we hope to educate Canadians about the validity of electric vehicles across the country. By switching to sustainable transportation, you can do your part in reducing greenhouse gas emissions to improve the environment. <br>
+
+
+## Open Data Used:
+
+  Charging Locations taken from the OpenChargeMap API: https://openchargemap.org/site
+  Video music sourced from: http://www.bensound.com/
+  
