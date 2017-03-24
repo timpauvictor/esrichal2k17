@@ -1,4 +1,4 @@
-# e-Range: ECCE App Challenge 2016 Entry
+# e-Range: ECCE App Challenge 2017 Entry
 
 Note: Features such as custom routing and turn-by-turn directions have been added since the recording of the project pitch
 
@@ -8,7 +8,7 @@ Or, if you would like to view the website locally (it still requires some javasc
   3. start a server in this directory; my preferred method was using python3 since it has a handy simple HTTPWebServer: `python -m http.server 8000`
   4. now you can go ahead and load up `localhost:8000/rehamilton.html` in your browser and enjoy!
 
-##About this app
+## About this app
 
   Using a mixture of open data this application serves to promote the validity of sustainable transportation in Canada. The app displays point information for charging stations across the country. Directions to these stations can be created by clicking on the hyperlink that appears when you pin your location or choose a location on the map. <br>
 Furthermore, data for available electric cars in Canada can be accessed by clicking on the car icon in the top right corner. This table displays information relating to make, model, year, and charging time (hours), and is sorted according to electric range (kilometers). 
