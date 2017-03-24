@@ -1,5 +1,7 @@
 # e-Range: ECCE App Challenge 2017 Entry
 
+Video: https://vimeo.com/209967208
+
 To view the website locally (it still requires some javascript CDNs and Material design lite so entirely offline viewing isn't possible), you would have to:
   1. Clone the repo using git: `git clone https://github.com/timpauvictor/esrichal2k17.git <directory>`
   2. change directory into it: `cd /some/directory/...`
